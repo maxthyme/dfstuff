@@ -36,6 +36,13 @@ function getTargetFromScreens()
         my_trg=dfhack.gui.getSelectedItem(true)
     elseif dfhack.gui.getSelectedJob(true) then
         my_trg=dfhack.gui.getSelectedJob(true)
+    elseif df.global.ui_advmode.menu==26 then
+	    local armies=df.global.world.armies.all
+		    for k,v in ipairs(armies) do
+			    if v.unk_48[0] then	
+			    my_trg=df.global.world.armies.all[k].unk_pos1 --omg I can't believe this worked
+			end
+		end
     else
         my_trg=df.global --I removed the qerror line here because I've been poking around in df.global stuff alot lately and this is just super handy.
     end
