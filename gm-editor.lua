@@ -37,7 +37,7 @@ function getTargetFromScreens()
     elseif dfhack.gui.getSelectedJob(true) then
         my_trg=dfhack.gui.getSelectedJob(true)
     else
-        my_trg=df.global
+        my_trg=df.global --removed the qerror line here because I've been poking around in df.global stuff alot lately and this is just super handy.
     end
     return my_trg
 end
