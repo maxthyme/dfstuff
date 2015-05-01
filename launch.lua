@@ -1,11 +1,12 @@
---Based on propel.lua by Roses, molested by Rumrusher and I until this happened, sorry.
+-- Activate with a cursor on screen and you will go there rapidly, attack something first to send them there.
+-- Based on propel.lua by Roses, molested by Rumrusher and I until this happened, sorry.
 function launch(unitSource,unitTarget)
 
 local curpos
 	if df.global.ui_advmode.menu==1 then
 		curpos=df.global.cursor
 	else
-		print ("No cursor located!  You would have slammed into the ground and exploded.")
+		print ("No cursor located!  You would have slammed into the ground and exploded.") --seriously, kasplut!
 		return
 	end
 
@@ -50,13 +51,13 @@ resultz = curpos.z - unitSource.pos.z
  proj.cur_pos.z=unitSource.pos.z
  proj.flags.no_impact_destroy=true
  proj.flags.piercing=true
- proj.flags.high_flying=true
+ proj.flags.high_flying=true --this probably doesn't do anything, let me know if you figure out what it is
  proj.flags.parabolic=true
  proj.flags.no_collide=true
  proj.flags.unk9=true
  proj.speed_x=resultx*10000
  proj.speed_y=resulty*10000
- proj.speed_z=resultz*10000
+ proj.speed_z=resultz*12500 --higher z speed makes it easier to reach a target safely
  unitoccupancy = dfhack.maps.ensureTileBlock(unitSource.pos).occupancy[unitSource.pos.x%16][unitSource.pos.y%16]
  if not unitSource.flags1.on_ground then 
   unitoccupancy.unit = false 
@@ -71,7 +72,7 @@ unitTarget = curpos
 if df.global.world.units.active[0].job.hunt_target==nil then
 unitSource = df.global.world.units.active[0]
 else
-unitSource = df.global.world.units.active[0].job.hunt_target
+unitSource = df.global.world.units.active[0].job.hunt_target --kudos Rumrusher for including this, allowing you to fling others around!
 end
  
 launch(unitSource,unitTarget)
