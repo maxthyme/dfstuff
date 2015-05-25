@@ -1,8 +1,8 @@
--- Allows setting useful preferences for forcing moods
+-- Allows setting useful preferences for faking moods
 -- based on pref_adjust by vjek, version 4, 20141016, for DF(hack) 40.08, with the getselectedunit portion from a Putnam script (and the dfhack lua API but he's still a wizard)
 -- turned into this hacked together version by some jerk named Max™ on the 8th of March 2015
 -- updated with print all and clear all functions on the 11th of April 2015
--- added artifact faking ability for advfort on the 8th of May 2015
+-- altered to provide an artifact faking ability for advfort on the 8th of May 2015
 -- Praise Armok!
 -- ---------------------------------------------------------------------------
 function axeplate(unit)
