@@ -2,7 +2,6 @@
 -- based on pref_adjust by vjek, version 4, 20141016, for DF(hack) 40.08, with the getselectedunit portion from a Putnam script (and the dfhack lua API but he's still a wizard)
 -- turned into this hacked together version by some jerk named Max™ on the 8th of March 2015
 -- updated with print all and clear all functions on the 11th of April 2015
--- added artifact faking ability for advfort on the 8th of May 2015
 -- Praise Armok!
 -- ---------------------------------------------------------------------------
 function axeplate(unit)
@@ -256,24 +255,6 @@ prefcount = #(unit.status.current_soul.preferences)
 print ("After, unit "..dfhack.TranslateName(dfhack.units.getVisibleName(unit)).." has "..prefcount.." preferences")
 
 end
--- -------------------------------------------------------------------------
-function weapon()
-		df.global.world.units.active[0].flags1.has_mood=true
-		df.global.world.units.active[0].mood=0
-		df.global.world.units.active[0].job.current_job.job_type=57
-		df.global.world.units.active[0].job.mood_skill=27
-		df.global.world.units.active[0].job.current_job.job_item[0].mat_type=0
-		df.global.world.units.active[0].job.current_job.job_item[0].mat_index=8
-end
--- ------------------------------------------------------------------------
-function armor()
-		df.global.world.units.active[0].flags1.has_mood=true
-		df.global.world.units.active[0].mood=0
-		df.global.world.units.active[0].job.current_job.job_type=57
-		df.global.world.units.active[0].job.mood_skill=28
-		df.global.world.units.active[0].job.current_job.job_items[0].mat_type=0
-		df.global.world.units.active[0].job.current_job.job_items[0].mat_index=8
-end
 -- ---------------------------------------------------------------------------
 function print_all(v)
 unit=v
@@ -388,14 +369,6 @@ if opt then
 		daggerpants(unit)
 		return
 	end
-	if opt=="fakew" then
-		weapon()
-		return
-	end
-	if opt=="fakea" then
-		armor()
-		return
-	end
 else
 	print ("Sets preferences for mooding to include a weapon type, equipment type, and material.")
 	print ("Valid options:")
@@ -411,6 +384,5 @@ else
 	print ("pig		-- likes picks, gauntlets, and steel")
 	print ("log		-- likes long swords, gauntlets, and steel")
 	print ("dap		-- likes daggers, greaves, and steel")
-	print ("fakew		-- use this option for an advfort weapon artifact.")
-	print ("fakea		-- use this option for an advfort armor artifact.")
+	print ("Feel free to adjust the values as you see fit, change the has steel to platinum, change the axp axes to great axes, whatnot.")
 	end
