@@ -4,6 +4,7 @@ validArgs = validArgs or utils.invert({
  'help',
  'material',
  'item',
+ 'name'
 })
 
 local args = utils.processArgs({...}, validArgs)
@@ -20,10 +21,11 @@ arguments:
             INORGANIC:IRON
             CREATURE_MAT:DWARF:BRAIN
             PLANT_MAT:MUSHROOM_HELMET_PLUMP:DRINK
-    -item itemstr
+    -item itemstring
         specify the itemdef of the item to be created
         examples:
             WEAPON:ITEM_WEAPON_PICK
+    -name namestring
 ]])
  return
 end
@@ -44,6 +46,7 @@ args.material = dfhack.matinfo.find(args.material)
 if not args.material then
  error 'Invalid material.'
 end
+
 
 local item = dfhack.items.createItem(itemType, itemSubtype, args.material['type'], args.material.index, args.creator)
 
@@ -68,9 +71,11 @@ local facts = df.global.world.artifacts.all
 		fake.item.fixed_temp = base.fixed_temp
 		fake.item.weight = base.weight
 		fake.item.weight_fraction = base.weight_fraction
-		fake.item.improvements:insert('#',{new = df.itemimprovement_spikesst,mat_type=22,mat_index=474,quality=5,skill_rating=15})
+		fake.item.improvements:insert('#',{new = df.itemimprovement_spikesst,mat_type=25,mat_index=474,quality=0,skill_rating=15})
+		fake.item.improvements:insert('#',{new = df.itemimprovement_spikesst,mat_type=25,mat_index=493,quality=0,skill_rating=15})
 		fake.item.improvements:insert('#',{new = df.itemimprovement_art_imagest,mat_type=22,mat_index=474,quality=5,skill_rating=15})
-		fake.item.improvements:insert('#',{new = df.itemimprovement_art_imagest,mat_type=22,mat_index=474,quality=5,skill_rating=15})
+		fake.item.improvements:insert('#',{new = df.itemimprovement_art_imagest,mat_type=42,mat_index=480,quality=5,skill_rating=15})
+		fake.item.improvements:insert('#',{new = df.itemimprovement_art_imagest,mat_type=22,mat_index=497,quality=5,skill_rating=15})
    fake.anon_1 = -1000000
    fake.anon_2 = -1000000
    fake.anon_3 = -1000000
@@ -82,5 +87,11 @@ local facts = df.global.world.artifacts.all
      if fake.item == 'WEAPON' then item:setSharpness(1,0) end
      if base == 'WEAPON' then item:setSharpness(1,0) end
      df.global.artifact_next_id=df.global.artifact_next_id+1
+ if args.name then do
+  fake.name.first_name = args.name
+  fake.name.language = 0
+  fake.name.has_name = true 
+         end
+      end
    end
 end
