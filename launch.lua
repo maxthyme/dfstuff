@@ -1,6 +1,5 @@
 -- Activate with a cursor on screen and you will go there rapidly, attack something first to send them there.
 -- Based on propel.lua by Roses, molested by Rumrusher and I until this happened, sorry.
--- OMG Toady pointed out which flag lets you land on your feet!
 function launch(unitSource,unitTarget)
 
 local curpos
@@ -56,10 +55,14 @@ resultz = curpos.z - unitSource.pos.z
  proj.flags.parabolic=true
  proj.flags.no_collide=true
  proj.flags.unk9=true
- proj.flags[12]=true
  proj.speed_x=resultx*10000
  proj.speed_y=resulty*10000
  proj.speed_z=resultz*12500 --higher z speed makes it easier to reach a target safely
+ if df.global.world.units.active[0].job.hunt_target==nil then
+  proj.flags[12]=true
+ elseif df.global.world.units.active[0].job.hunt_target then
+  proj.flags[12]=false
+ end
  unitoccupancy = dfhack.maps.ensureTileBlock(unitSource.pos).occupancy[unitSource.pos.x%16][unitSource.pos.y%16]
  if not unitSource.flags1.on_ground then 
   unitoccupancy.unit = false 
