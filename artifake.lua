@@ -26,13 +26,14 @@ arguments:
         examples:
             WEAPON:ITEM_WEAPON_PICK
     -name namestring
-    Select a unit to assign them as the creator.
 ]])
  return
 end
 
-args.creator = dfhack.gui.getSelectedUnit()
-
+if dfhack.gui.getSelectedUnit(true) then
+ args.creator = dfhack.gui.getSelectedUnit()
+ else args.creator = df.global.world.units.active[0]
+end
 if not args.item then
  error 'Invalid item.'
 end
