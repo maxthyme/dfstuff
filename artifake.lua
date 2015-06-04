@@ -61,6 +61,7 @@ local facts = df.global.world.artifacts.all
    fake.id=df.global.artifact_next_id
    fake.item = {new=base}
 		fake.item.flags.artifact = true
+		fake.item.flags.artifact_mood = true
 		fake.item.id = base.id
 		fake.item.general_refs:insert('#',{new =  df.general_ref_is_artifactst})
 		fake.item.general_refs[0].artifact_id = fake.id
@@ -81,6 +82,7 @@ local facts = df.global.world.artifacts.all
    fake.anon_2 = -1000000
    fake.anon_3 = -1000000
      base.flags.artifact = true
+     base.flags.artifact_mood = true
      base.general_refs = fake.item.general_refs
      base.improvements = fake.item.improvements
      fake.item:setQuality(5)
