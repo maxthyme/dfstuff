@@ -4,7 +4,9 @@ validArgs = validArgs or utils.invert({
  'help',
  'material',
  'item',
- 'name'
+ 'name',
+ 'r',
+ 'l' 
 })
 
 local args = utils.processArgs({...}, validArgs)
@@ -26,6 +28,11 @@ arguments:
         examples:
             WEAPON:ITEM_WEAPON_PICK
     -name namestring
+    	specify a first name if desired
+    -r
+	for right handed gloves
+    -l
+	for left handed gloves
 ]])
  return
 end
@@ -101,6 +108,14 @@ local facts = df.global.world.artifacts.all
 		}
 		)
    df.global.hist_event_next_id = df.global.hist_event_next_id+1 
+if args.r then
+	base.handedness[0] = true
+	fake.item.handedness[0] = true
+end
+if args.l then
+	base.handedness[1] = true
+	fake.item.handedness[1] = true
+end
  if args.name then do
   fake.name.first_name = args.name
   fake.name.language = 0
