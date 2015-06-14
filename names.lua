@@ -1,4 +1,3 @@
-local dlg=require 'gui.dialogs'
 local utils = require 'utils'
 
 validArgs = validArgs or utils.invert({
@@ -64,14 +63,3 @@ function newName()
  	oldn.has_name = newn.has_name
 end
 newName()
-
-function firstName()
-  newn.first_name = args.first
-end
-
-dlg.showInputPrompt(
-  'Rename Target',
-  'Enter a new name for the target:', COLOR_GREEN,
-  newn.first_name,
-  curry(firstName, first)
-)
