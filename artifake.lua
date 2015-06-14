@@ -90,6 +90,17 @@ local facts = df.global.world.artifacts.all
      if fake.item == 'WEAPON' then item:setSharpness(1,0) end
      if base == 'WEAPON' then item:setSharpness(1,0) end
      df.global.artifact_next_id=df.global.artifact_next_id+1
+ df.global.world.history.events:new()
+ df.global.world.history.events:insert('#',{new=df.history_event_artifact_createdst,
+		year = df.global.cur_year,
+		seconds = df.global.cur_year_tick_advmode,
+		id = df.global.hist_event_next_id,
+		artifact_id = fake.id,
+		unit_id = args.creator.id,
+		hfid = args.creator.hist_figure_id,
+		}
+		)
+   df.global.hist_event_next_id = df.global.hist_event_next_id+1 
  if args.name then do
   fake.name.first_name = args.name
   fake.name.language = 0
