@@ -13,14 +13,14 @@ if args.help then
  print(
 [[names.lua
 arguments:
-    -help
+    -help				
         print this help message
-    -item 
-	if currently targeting an item
-    -unit 
-	if currently targeting a unit
-    -first
-	if a first name is desired
+    -item 					
+	if viewing an item		
+    -unit 					
+	if viewing a unit 			
+    -first Somename or "Some Names like This"
+	if a first name is desired, leave blank to clear current first name
 ]])
  return
 end
@@ -33,7 +33,7 @@ if args.item then
 	fact = dfhack.gui.getCurViewscreen().parent.item.general_refs[0].artifact_id
 	trg = df.artifact_record.find(fact)
 end
-
+ 
 if args.unit then
 	trg = dfhack.gui.getCurViewscreen().parent.unit
 end
@@ -45,20 +45,10 @@ end
 function newName()
  	newn = dfhack.gui.getCurViewscreen().name
 	oldn = trg.name
- 	oldn.words[0] = newn.words[0]
- 	oldn.words[1] = newn.words[1]
- 	oldn.words[2] = newn.words[2]
- 	oldn.words[3] = newn.words[3]
- 	oldn.words[4] = newn.words[4]
- 	oldn.words[5] = newn.words[5]
- 	oldn.words[6] = newn.words[6]
- 	oldn.parts_of_speech[0] = newn.parts_of_speech[0]
- 	oldn.parts_of_speech[1] = newn.parts_of_speech[1]
- 	oldn.parts_of_speech[2] = newn.parts_of_speech[2]
- 	oldn.parts_of_speech[3] = newn.parts_of_speech[3]
- 	oldn.parts_of_speech[4] = newn.parts_of_speech[4]
- 	oldn.parts_of_speech[5] = newn.parts_of_speech[5]
- 	oldn.parts_of_speech[6] = newn.parts_of_speech[6]
+	for k = 0,6 do
+	 	oldn.words[k] = newn.words[k]
+ 		oldn.parts_of_speech[k] = newn.parts_of_speech[k]
+	end
  	oldn.language = newn.language
  	oldn.has_name = newn.has_name
 end
