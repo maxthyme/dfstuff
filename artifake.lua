@@ -2,7 +2,7 @@ local utils = require 'utils'
 
 validArgs = validArgs or utils.invert({
  'help',
- 'material',
+ 'mat',
  'item',
  'name',
  'r',
@@ -17,7 +17,7 @@ if args.help then
 arguments:
     -help
         print this help message
-    -material matstring
+    -mat matstring
         specify the material of the item to be created
         examples:
             INORGANIC:IRON
@@ -50,13 +50,13 @@ if itemType == -1 then
 end
 local itemSubtype = dfhack.items.findSubtype(args.item)
 
-args.material = dfhack.matinfo.find(args.material)
-if not args.material then
+args.mat = dfhack.matinfo.find(args.mat)
+if not args.mat then
  error 'Invalid material.'
 end
 
 
-local item = dfhack.items.createItem(itemType, itemSubtype, args.material['type'], args.material.index, args.creator)
+local item = dfhack.items.createItem(itemType, itemSubtype, args.mat['type'], args.mat.index, args.creator)
 
  local base=df.item.find(df.global.item_next_id-1)
  df.global.world.artifacts.all:new()
